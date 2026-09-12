@@ -4,6 +4,12 @@
 # Happy prototyping!
 
 extends CharacterBody3D
+@onready var weapon_sprite: Sprite3D = $Head/Weapon
+@export var bob_frequency := 2.0  # How fast the weapon bobs
+@export var bob_amplitude := 0.08 # How far the weapon moves
+
+var bob_time: float = 0.0
+var weapon_base_position: Vector3
 
 ## Can we move around?
 @export var can_move : bool = true
@@ -54,6 +60,8 @@ var freeflying : bool = false
 @onready var collider: CollisionShape3D = $Collider
 
 func _ready() -> void:
+	weapon_base_position = weapon_sprite.position
+	
 	check_input_mappings()
 	look_rotation.y = rotation.y
 	look_rotation.x = head.rotation.x
@@ -118,6 +126,8 @@ func _physics_process(delta: float) -> void:
 	# Use velocity to actually move
 	move_and_slide()
 
+func _process(delta: float) -> void:
+	_handle_weapon_bob(delta)
 
 ## Rotate us to look around.
 ## Base of controller rotates around y (left/right). Head rotates around x (up/down).
@@ -176,3 +186,18 @@ func check_input_mappings():
 	if can_freefly and not InputMap.has_action(input_freefly):
 		push_error("Freefly disabled. No InputAction found for input_freefly: " + input_freefly)
 		can_freefly = false
+
+func _handle_weapon_bob(delta: float) -> void:
+	var horizontal_speed = Vector2(velocity.x, velocity.z).length()
+	
+	if horizontal_speed > 0.1 and is_on_floor():
+		bob_time += delta * horizontal_speed
+	else:
+		bob_time = lerp(bob_time, 0.0, delta * 5.0)
+	
+	var bob_offset_y = sin(bob_time * bob_frequency) * bob_amplitude
+	var bob_offset_x = cos(bob_time * bob_frequency * 0.5) * bob_amplitude
+	
+	var target_position = weapon_base_position + Vector3(bob_offset_x, bob_offset_y, 0.0)
+	
+	weapon_sprite.position = weapon_sprite.position.lerp(target_position, delta * 10.0)

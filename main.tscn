@@ -1,29 +1,55 @@
 [gd_scene format=3 uid="uid://cs5ny6ivmu8ur"]
 
+[ext_resource type="Texture2D" uid="uid://bn3pnkodvlicx" path="res://assets/middle.png" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://b55ux6a778ewj" path="res://things/ogre/orc.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://c481asb02q03j" path="res://ground.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dfvlfd1fmfuhx" path="res://ui.tscn" id="5_lquwl"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kek77"]
+sky_top_color = Color(0.030115182, 0.14374804, 0.08400487, 1)
+sky_horizon_color = Color(0.5062636, 0.6858936, 0.7645185, 1)
+sky_curve = 0.160766
+sky_energy_multiplier = 1.4
+sky_cover = ExtResource("1_1bvp3")
+sky_cover_modulate = Color(0.353475, 0.6360045, 0.56533736, 1)
+ground_bottom_color = Color(0.19309446, 0.22505409, 0.20907348, 1)
+ground_horizon_color = Color(0.7176471, 1, 1, 1)
+ground_curve = 0.044382744
+energy_multiplier = 0.75
 
-[sub_resource type="Sky" id="Sky_0xm2m"]
-sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
+[sub_resource type="Sky" id="Sky_5vw27"]
+sky_material = SubResource("ProceduralSkyMaterial_kek77")
 
-[sub_resource type="Environment" id="Environment_h2yge"]
+[sub_resource type="Environment" id="Environment_272bh"]
 background_mode = 2
-sky = SubResource("Sky_0xm2m")
-tonemap_mode = 2
+sky = SubResource("Sky_5vw27")
+tonemap_mode = 4
+tonemap_exposure = 0.76
+tonemap_agx_contrast = 1.18
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.10048322, 0.2739691, 0.26119703, 1)
+fog_sky_affect = 0.0
+fog_height = 2.0
+fog_height_density = 1.2089
 
 [node name="Main" type="Node3D" unique_id=1110698009]
 
+[node name="Ui" parent="." unique_id=791350379 instance=ExtResource("5_lquwl")]
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1054908050]
-environment = SubResource("Environment_h2yge")
+environment = SubResource("Environment_272bh")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=565835382]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+transform = Transform3D(-0.6986395, -0.36710238, 0.61411613, -0.25963473, 0.9299071, 0.2605045, -0.6667028, 0.022552878, -0.7449824, 0, 0, 0)
+light_color = Color(0.9137255, 1, 0.6431373, 1)
+light_energy = 1.932
+light_indirect_energy = 2.087
+light_angular_distance = 5.24
+light_specular = 0.379
 shadow_enabled = true
+shadow_opacity = 0.6
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=113203952]
 use_collision = true

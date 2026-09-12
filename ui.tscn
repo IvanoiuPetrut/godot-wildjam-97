@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://dfvlfd1fmfuhx"]
+
+[ext_resource type="Texture2D" uid="uid://bo3sb45wttjqm" path="res://assets/crosshair-000.png" id="1_fyqef"]
+[ext_resource type="Script" uid="uid://ce64jcokuua06" path="res://ui.gd" id="1_m6e0p"]
+[ext_resource type="Shader" uid="uid://cohm5jc3km0ok" path="res://shaders/crosshair.gdshader" id="2_27fn8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nltto"]
+shader = ExtResource("2_27fn8")
+shader_parameter/fire_intensity = 0.0
+shader_parameter/flash_color = Color(0.20261061, 0.55815864, 0.44636697, 1)
+
+[sub_resource type="Animation" id="Animation_m6e0p"]
+resource_name = "shoot"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_27fn8"]
+_data = {
+&"shoot": SubResource("Animation_m6e0p")
+}
+
+[node name="Ui" type="CanvasLayer" unique_id=791350379]
+script = ExtResource("1_m6e0p")
+
+[node name="CanvasLayer" type="Control" parent="." unique_id=189013366]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=1468523129]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crosshair" type="TextureRect" parent="CanvasLayer/MarginContainer" unique_id=548316156]
+material = SubResource("ShaderMaterial_nltto")
+layout_mode = 2
+texture = ExtResource("1_fyqef")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1581281332]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("1_fyqef")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1157147143]
+libraries/ = SubResource("AnimationLibrary_27fn8")

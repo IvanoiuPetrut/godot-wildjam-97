@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dibod8ukqie7i"]
+
+[ext_resource type="Script" uid="uid://2f2hptrybuvr" path="res://things/health/health.gd" id="1_ckvsk"]
+[ext_resource type="Texture2D" uid="uid://cqmeqlg551656" path="res://assets/cigar/top.png" id="1_t116d"]
+[ext_resource type="Texture2D" uid="uid://bc1mw6k0bnrwk" path="res://assets/cigar/middle.png" id="2_ckvsk"]
+[ext_resource type="Texture2D" uid="uid://xg4buyb4cdrk" path="res://assets/cigar/bottom.png" id="3_kv6hd"]
+
+[node name="Health" type="Node3D" unique_id=701347803]
+script = ExtResource("1_ckvsk")
+spacing = 10.0
+
+[node name="Top" type="Sprite3D" parent="." unique_id=1160815717]
+texture = ExtResource("1_t116d")
+
+[node name="Middle" type="Sprite3D" parent="." unique_id=1468903355]
+texture = ExtResource("2_ckvsk")
+
+[node name="Bottom" type="Sprite3D" parent="." unique_id=605252678]
+texture = ExtResource("3_kv6hd")

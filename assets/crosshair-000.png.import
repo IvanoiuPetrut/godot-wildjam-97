@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpffgm10ty2eu"
-path.s3tc="res://.godot/imported/ogre-attack.png-dd633ac8e2c9dd7c920dec4cfafca1eb.s3tc.ctex"
+uid="uid://bo3sb45wttjqm"
+path="res://.godot/imported/crosshair-000.png-82c5873d365d4d4b3b9e0a78e1f4fe4b.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ogre/ogre-attack.png"
-dest_files=["res://.godot/imported/ogre-attack.png-dd633ac8e2c9dd7c920dec4cfafca1eb.s3tc.ctex"]
+source_file="res://assets/crosshair-000.png"
+dest_files=["res://.godot/imported/crosshair-000.png-82c5873d365d4d4b3b9e0a78e1f4fe4b.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -24,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -38,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1
