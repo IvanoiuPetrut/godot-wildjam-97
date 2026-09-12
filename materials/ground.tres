@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://6lh4sxdpwy5h"]
+
+[ext_resource type="Texture2D" uid="uid://cisufve8jg1g6" path="res://textures/all-rock-tiles_02.png" id="1_xygne"]
+
+[resource]
+albedo_texture = ExtResource("1_xygne")
+uv1_scale = Vector3(25, 25, 1)
+texture_filter = 0

@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://b55ux6a778ewj"]
+
+[ext_resource type="Script" uid="uid://616pfm1r7n6u" path="res://things/ogre/orc.gd" id="1_6yv3t"]
+[ext_resource type="Texture2D" uid="uid://hfs5whrnrn1a" path="res://assets/ogre/ogre-walk.png" id="1_ws5q1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xw0u"]
+atlas = ExtResource("1_ws5q1")
+region = Rect2(0, 26, 144, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kapy6"]
+atlas = ExtResource("1_ws5q1")
+region = Rect2(144, 26, 144, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hc3a"]
+atlas = ExtResource("1_ws5q1")
+region = Rect2(288, 26, 144, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vumo0"]
+atlas = ExtResource("1_ws5q1")
+region = Rect2(432, 26, 144, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31h1d"]
+atlas = ExtResource("1_ws5q1")
+region = Rect2(576, 26, 144, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfwqp"]
+atlas = ExtResource("1_ws5q1")
+region = Rect2(720, 26, 144, 54)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d22v1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3xw0u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kapy6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6hc3a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vumo0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31h1d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfwqp")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6yv3t"]
+
+[node name="Ogre" type="CharacterBody3D" unique_id=1510140027]
+script = ExtResource("1_6yv3t")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=848440076]
+pixel_size = 0.04
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_d22v1")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.80994713
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=660045224]
+shape = SubResource("CapsuleShape3D_6yv3t")
