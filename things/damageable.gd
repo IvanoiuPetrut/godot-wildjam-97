@@ -18,6 +18,12 @@ func take_damage(amount: float) -> void:
 	if health <= 0.0:
 		die()
 		
+func get_health(amount:float) -> void:
+	if health >= max_health:
+		return
+	health = min(health + amount, max_health)
+	health_changed.emit(health, max_health)
+		
 func die() -> void:
 	died.emit()
 	queue_free()

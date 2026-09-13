@@ -14,10 +14,13 @@ extends Damageable
 var bob_time: float = 0.0
 var weapon_base_position: Vector3
 var can_shoot: bool = true
+
 @export var damage_interval: float = 0.2
 @export var damage_over_time: float = 0.5
+
 @export var max_energy: float = 100.0
-var energy: float 
+@export var energy_amount: float = 0.2
+var energy: float
 
 ## Can we move around?
 @export var can_move : bool = true
@@ -245,4 +248,11 @@ func _on_health_timer_timeout() -> void:
 	take_damage(damage_over_time)
 	
 func _get_health() -> void:
-	print('health')
+	if energy <= 0 or health == max_health:
+		return
+	get_health(energy_amount)
+	energy -= energy_amount
+	print('health ', health)
+	print('max health ', max_health)
+	print('energy ', energy)
+	
