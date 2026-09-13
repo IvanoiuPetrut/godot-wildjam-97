@@ -7,9 +7,11 @@ extends CharacterBody3D
 @onready var weapon_sprite: Sprite3D = $Head/Weapon
 @export var bob_frequency := 2.0  # How fast the weapon bobs
 @export var bob_amplitude := 0.08 # How far the weapon moves
+@onready var aim_ray: RayCast3D = $Head/Camera3D/AimRay
 
 var bob_time: float = 0.0
 var weapon_base_position: Vector3
+var can_shoot: bool = true
 
 ## Can we move around?
 @export var can_move : bool = true
@@ -201,3 +203,14 @@ func _handle_weapon_bob(delta: float) -> void:
 	var target_position = weapon_base_position + Vector3(bob_offset_x, bob_offset_y, 0.0)
 	
 	weapon_sprite.position = weapon_sprite.position.lerp(target_position, delta * 10.0)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("shoot") and can_shoot:
+		_fire_weapon()
+
+func _fire_weapon() -> void:
+	aim_ray.force_raycast_update()
+	if aim_ray.is_colliding():
+		var hit_target = aim_ray.get_collider()
+		print(hit_target)
+	pass

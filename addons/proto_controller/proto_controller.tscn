@@ -33,6 +33,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=23298149]
 
+[node name="AimRay" type="RayCast3D" parent="Head/Camera3D" unique_id=1018409931]
+target_position = Vector3(0, 1, -50)
+debug_shape_custom_color = Color(0.5764706, 1, 0.047058824, 1)
+debug_shape_thickness = 4
+
 [node name="Health" parent="Head" unique_id=701347803 instance=ExtResource("3_5hfox")]
 transform = Transform3D(0.15267044, 0.04167185, 0.12229142, -0.03798611, 0.19542159, -0.01916915, -0.123486, -0.008594065, 0.15709026, -0.6073811, 0.20163941, -0.58121586)
 base_spacing = 0.2
