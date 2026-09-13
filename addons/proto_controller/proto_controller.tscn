@@ -17,6 +17,7 @@ height = 1.8
 
 [node name="ProtoController" type="CharacterBody3D" unique_id=1018779692 groups=["player"]]
 script = ExtResource("1_ucva2")
+max_health = 100.0
 
 [node name="Mesh" type="MeshInstance3D" parent="." unique_id=992298579]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -47,3 +48,5 @@ transform = Transform3D(0.4694716, 0, -0.88294756, 0, 1, 0, 0.88294756, 0, 0.469
 flip_h = true
 texture_filter = 0
 texture = ExtResource("2_wr06p")
+
+[node name="HealthTimer" type="Timer" parent="." unique_id=379942082]

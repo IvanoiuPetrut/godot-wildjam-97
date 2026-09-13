@@ -3,15 +3,21 @@
 # Intended for rapid prototyping of first-person games.
 # Happy prototyping!
 
-extends CharacterBody3D
+extends Damageable
 @onready var weapon_sprite: Sprite3D = $Head/Weapon
 @export var bob_frequency := 2.0  # How fast the weapon bobs
 @export var bob_amplitude := 0.08 # How far the weapon moves
 @onready var aim_ray: RayCast3D = $Head/Camera3D/AimRay
+@onready var health_tower: Node3D = $Head/Health
+@onready var health_timer: Timer = $HealthTimer
 
 var bob_time: float = 0.0
 var weapon_base_position: Vector3
 var can_shoot: bool = true
+@export var damage_interval: float = 0.2
+@export var damage_over_time: float = 0.5
+@export var max_energy: float = 100.0
+var energy: float 
 
 ## Can we move around?
 @export var can_move : bool = true
@@ -62,7 +68,17 @@ var freeflying : bool = false
 @onready var collider: CollisionShape3D = $Collider
 
 func _ready() -> void:
+	super()
+	health_changed.connect(health_tower._on_health_changed)
+	health_tower._on_health_changed(health, max_health)
+	aim_ray.add_exception(self)
 	weapon_base_position = weapon_sprite.position
+	
+	health_timer.wait_time = damage_interval
+	health_timer.timeout.connect(_on_health_timer_timeout)
+	health_timer.start()
+	
+	energy = max_energy
 	
 	check_input_mappings()
 	look_rotation.y = rotation.y
@@ -207,10 +223,26 @@ func _handle_weapon_bob(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot") and can_shoot:
 		_fire_weapon()
+	if event.is_action_pressed("get_health"):
+		_get_health()
 
 func _fire_weapon() -> void:
 	aim_ray.force_raycast_update()
-	if aim_ray.is_colliding():
-		var hit_target = aim_ray.get_collider()
-		print(hit_target)
-	pass
+	if not aim_ray.is_colliding():
+		return
+		
+	var hit_target := aim_ray.get_collider()
+	if hit_target is Damageable:
+		hit_target.take_damage(1.0)
+
+func die() -> void:
+	died.emit()
+	can_move = false
+	can_shoot = false
+	print("player died")
+	
+func _on_health_timer_timeout() -> void:
+	take_damage(damage_over_time)
+	
+func _get_health() -> void:
+	print('health')

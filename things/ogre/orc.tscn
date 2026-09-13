@@ -80,9 +80,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_opnhw")
 }],
-"loop": 0,
+"loop": false,
 "name": &"attack",
-"speed": 8.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -103,7 +103,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dfwqp")
 }],
-"loop": 1,
+"loop": true,
 "name": &"idle",
 "speed": 8.0
 }]
@@ -120,6 +120,8 @@ texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_d22v1")
 animation = &"attack"
 autoplay = "idle"
+frame = 6
+frame_progress = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=660045224]
 shape = SubResource("CapsuleShape3D_6yv3t")

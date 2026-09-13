@@ -3,6 +3,19 @@
 [ext_resource type="Texture2D" uid="uid://bo3sb45wttjqm" path="res://assets/crosshair-000.png" id="1_fyqef"]
 [ext_resource type="Script" uid="uid://ce64jcokuua06" path="res://ui.gd" id="1_m6e0p"]
 [ext_resource type="Shader" uid="uid://cohm5jc3km0ok" path="res://shaders/crosshair.gdshader" id="2_27fn8"]
+[ext_resource type="Shader" uid="uid://bg042aonp33ix" path="res://shaders/damage_overlay.gdshader" id="2_nltto"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ibotj"]
+shader = ExtResource("2_nltto")
+shader_parameter/intensity = 0.42800002033
+shader_parameter/vignette_color = Color(0.09637485, 0.05619636, 0.0063302317, 1)
+shader_parameter/vignette_inner = 0.95
+shader_parameter/vignette_inner_hurt = 0.15
+shader_parameter/vignette_outer = 1.45
+shader_parameter/vignette_base = 0.5470000259825
+shader_parameter/aberration = 0.0230000010925
+shader_parameter/pulse_speed = 7.0
+shader_parameter/pulse_amount = 0.494000023465
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nltto"]
 shader = ExtResource("2_27fn8")
@@ -19,6 +32,17 @@ _data = {
 
 [node name="Ui" type="CanvasLayer" unique_id=791350379]
 script = ExtResource("1_m6e0p")
+
+[node name="DamageOverlay" type="CanvasLayer" parent="." unique_id=1643387892]
+
+[node name="ColorRect" type="ColorRect" parent="DamageOverlay" unique_id=1823721986]
+material = SubResource("ShaderMaterial_ibotj")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="CanvasLayer" type="Control" parent="." unique_id=189013366]
 layout_mode = 3

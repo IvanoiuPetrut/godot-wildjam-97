@@ -1,13 +1,15 @@
-extends CharacterBody3D
+extends Damageable
 
 var target: Node3D
 var is_attacking: bool = false
 
 @export var speed := 3.0
-@export var stop_distance := 1.0
+@export var stop_distance := 2.0
+@export var attack_damage := 5.0
 @onready var animated_sprite_3d: AnimatedSprite3D = $AnimatedSprite3D
 
 func _ready() -> void:
+	super()
 	target = get_tree().get_first_node_in_group("player")
 	animated_sprite_3d.animation_finished.connect(_on_animation_finished)
 
@@ -43,5 +45,14 @@ func _physics_process(delta: float) -> void:
 	
 func _on_animation_finished():
 	if animated_sprite_3d.animation == "attack":
-		print("anim finished")
+		_try_hit_target()
 		is_attacking = false
+
+func _try_hit_target() -> void:
+	if not is_instance_valid(target) or not target is Damageable:
+		return
+	
+	var to_target := target.global_position - global_position
+	to_target.y = 0.0
+	if to_target.length() <= stop_distance:
+		target.take_damage(attack_damage)
