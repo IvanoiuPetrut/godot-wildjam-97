@@ -4,9 +4,6 @@
 
 [resource]
 albedo_texture = ExtResource("1_xygne")
-uv1_scale = Vector3(25, 25, 1)
+uv1_scale = Vector3(250, 250, 250)
 texture_filter = 0
 proximity_fade_enabled = true
-distance_fade_mode = 1
-distance_fade_min_distance = 46.8
-distance_fade_max_distance = 0.0

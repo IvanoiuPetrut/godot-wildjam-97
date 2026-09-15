@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://shtyo1pykvvq"]
+
+[ext_resource type="Material" uid="uid://cqgjlefj2g30y" path="res://materials/tower.tres" id="1_afc2w"]
+
+[node name="Tower" type="Node3D" unique_id=432150047]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1891878056]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=624763118]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, 0)
+size = Vector3(1, 2.9, 1)
+material = ExtResource("1_afc2w")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=2059648018]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+size = Vector3(1.2, 0.2, 1.2)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1456156248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.602387, 0)
+size = Vector3(0.90000004, 1, 0.90000004)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1470667188]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 4.4787183, 0)
+radius = 0.8
+height = 1.0
+sides = 4
+cone = true
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=12640037]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47, 1.4499999, 0.47)
+size = Vector3(0.14, 2.8999999, 0.14)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D4" unique_id=1681432759]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.96999997, 0.009999871, 0.01999998)
+size = Vector3(0.14, 2.8999999, 0.14)
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=142645748]
+transform = Transform3D(0.7, 0, 0, 0, -4.371139e-08, -0.7, 0, 1, -3.059797e-08, -0.01999998, 3.5839999, 0.44000003)
+height = 0.08
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCylinder3D2" unique_id=1586964431]
+transform = Transform3D(0.7, 0, 0, 0, -1, 6.119594e-08, 0, -8.742278e-08, -0.7, -0.01999998, 0.01000005, -0.029000124)
+operation = 2
+height = 0.08

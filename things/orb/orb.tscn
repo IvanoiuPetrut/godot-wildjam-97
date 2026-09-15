@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://b0ql1tck6d881"]
+
+[ext_resource type="Script" uid="uid://dj8h1uvy6574c" path="res://things/orb/orb.gd" id="1_3fahn"]
+[ext_resource type="Texture2D" uid="uid://2mexj1a5tmcf" path="res://assets/ball.png" id="1_t8p86"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3fahn"]
+atlas = ExtResource("1_t8p86")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acyyy"]
+atlas = ExtResource("1_t8p86")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rpy6n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3fahn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acyyy")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_paxbi"]
+size = Vector3(2.6000001, 0.4, 2.9)
+
+[sub_resource type="Animation" id="Animation_3fahn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:pixel_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.06]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite3D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_acyyy"]
+resource_name = "idle"
+length = 0.23333333
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite3D:pixel_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333335),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.05, 0.06]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite3D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 3.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rpy6n"]
+_data = {
+&"RESET": SubResource("Animation_3fahn"),
+&"idle": SubResource("Animation_acyyy")
+}
+
+[node name="Orb" type="Node3D" unique_id=2104434160]
+script = ExtResource("1_3fahn")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=2054721338]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+pixel_size = 0.06
+billboard = 2
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_rpy6n")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.86817205
+
+[node name="Area3D" type="Area3D" parent="." unique_id=259513594]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=608811727]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20000008, -1.4901161e-08, 0.1500001)
+shape = SubResource("BoxShape3D_paxbi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1764639380]
+libraries/ = SubResource("AnimationLibrary_rpy6n")
+autoplay = &"idle"

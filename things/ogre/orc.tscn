@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://616pfm1r7n6u" path="res://things/ogre/orc.gd" id="1_6yv3t"]
 [ext_resource type="Texture2D" uid="uid://hfs5whrnrn1a" path="res://assets/ogre/ogre-walk.png" id="1_ws5q1"]
+[ext_resource type="PackedScene" uid="uid://b0ql1tck6d881" path="res://things/orb/orb.tscn" id="2_joy0t"]
 [ext_resource type="Texture2D" uid="uid://cpffgm10ty2eu" path="res://assets/ogre/ogre-attack.png" id="2_jr3ew"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_joy0t"]
@@ -112,6 +113,7 @@ animations = [{
 
 [node name="Ogre" type="CharacterBody3D" unique_id=1510140027]
 script = ExtResource("1_6yv3t")
+orb_scene = ExtResource("2_joy0t")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=848440076]
 pixel_size = 0.04

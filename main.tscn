@@ -2,10 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://bn3pnkodvlicx" path="res://assets/middle.png" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://b55ux6a778ewj" path="res://things/ogre/orc.tscn" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://c481asb02q03j" path="res://ground.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dfvlfd1fmfuhx" path="res://ui.tscn" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://c3khth1nn3noc" path="res://things/spawner/spawner.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://clojno7eu6y6u" path="res://things/tree.tscn" id="6_272bh"]
+[ext_resource type="PackedScene" uid="uid://1jpvxkaxro7i" path="res://things/grass.tscn" id="7_272bh"]
+[ext_resource type="PackedScene" uid="uid://shtyo1pykvvq" path="res://things/tower.tscn" id="8_5vw27"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kek77"]
 sky_top_color = Color(0.030115182, 0.14374804, 0.08400487, 1)
@@ -53,27 +55,36 @@ light_specular = 0.379
 shadow_enabled = true
 shadow_opacity = 0.6
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=113203952]
-use_collision = true
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=2049321919]
-transform = Transform3D(1, 0, 0, 0, 5.25, 0, 0, 0, 1, -5.6, 0, 0)
-
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=91616789]
-transform = Transform3D(1, 0, 0, 0, 5.25, 0, 0, 0, 1, 3.6, 0, 7.4)
-
-[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=198121803]
-transform = Transform3D(1, 0, 0, 0, 5.25, 0, 0, 0, 1, 3.6, 0, -5.6)
-
 [node name="ProtoController" parent="." unique_id=401804775 instance=ExtResource("1_ig7tw")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3, 0.2, 6.4)
-
-[node name="Ogre" parent="." unique_id=1989120002 instance=ExtResource("2_0xm2m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.1, 0.2)
 
 [node name="Ground" parent="." unique_id=1398001116 instance=ExtResource("3_h2yge")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7, 0, -1.3000001)
 
 [node name="Spawner" parent="." unique_id=2107025335 instance=ExtResource("6_7mycd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.900001, 0, -6.1000004)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=485204734]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9, 0.3, 1)
+light_color = Color(1, 0.24705882, 1, 1)
+light_energy = 12.497
+omni_attenuation = 0.584
+
+[node name="Tree" parent="." unique_id=1860872115 instance=ExtResource("6_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8, 1.3999997, 4.1)
+
+[node name="Tree2" parent="." unique_id=771527752 instance=ExtResource("6_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.7, 1.3999997, 9.7)
+
+[node name="Tree3" parent="." unique_id=1127403445 instance=ExtResource("6_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.3, 1.8999997, 4.1)
+
+[node name="Grass" parent="." unique_id=799053036 instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0000005, 0.100000024, 2.1000001)
+
+[node name="Grass" parent="Grass" unique_id=1897863890 instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0000005, 0.100000024, 3.8000004)
+
+[node name="Tower" parent="." unique_id=432150047 instance=ExtResource("8_5vw27")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -20, 0, -59.800003)

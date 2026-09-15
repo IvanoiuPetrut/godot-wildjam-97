@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0cmkldxwkd6n"
-path.s3tc="res://.godot/imported/all-rock-tiles_08.png-e4c9a200800b8105fd638ec448ce9077.s3tc.ctex"
+uid="uid://ciwucwhvb8p5m"
+path.s3tc="res://.godot/imported/cigar-top.png-de43e4f74af9023784976e06126617aa.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/all-rock-tiles_08.png"
-dest_files=["res://.godot/imported/all-rock-tiles_08.png-e4c9a200800b8105fd638ec448ce9077.s3tc.ctex"]
+source_file="res://assets/cigar/cigar-top.png"
+dest_files=["res://.godot/imported/cigar-top.png-de43e4f74af9023784976e06126617aa.s3tc.ctex"]
 
 [params]
 

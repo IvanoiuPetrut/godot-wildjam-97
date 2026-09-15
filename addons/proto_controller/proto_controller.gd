@@ -10,6 +10,7 @@ extends Damageable
 @onready var aim_ray: RayCast3D = $Head/Camera3D/AimRay
 @onready var health_tower: Node3D = $Head/Health
 @onready var health_timer: Timer = $HealthTimer
+@onready var camera_3d: Camera3D = $Head/Camera3D
 
 var bob_time: float = 0.0
 var weapon_base_position: Vector3
@@ -21,6 +22,8 @@ var can_shoot: bool = true
 @export var max_energy: float = 100.0
 @export var energy_amount: float = 0.2
 var energy: float
+
+signal energy_changed(current: float, maximum: float)
 
 ## Can we move around?
 @export var can_move : bool = true
@@ -74,6 +77,7 @@ func _ready() -> void:
 	super()
 	health_changed.connect(health_tower._on_health_changed)
 	health_tower._on_health_changed(health, max_health)
+	energy_changed.connect(_on_energy_changed)
 	aim_ray.add_exception(self)
 	weapon_base_position = weapon_sprite.position
 	
@@ -227,10 +231,12 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot") and can_shoot:
 		_fire_weapon()
 	if event.is_action_pressed("get_health"):
-		_get_health()
+		_on_get_health()
 
 func _fire_weapon() -> void:
 	aim_ray.force_raycast_update()
+	camera_3d.shake_camera()
+	weapon_sprite.shoot()
 	if not aim_ray.is_colliding():
 		return
 		
@@ -247,12 +253,19 @@ func die() -> void:
 func _on_health_timer_timeout() -> void:
 	take_damage(damage_over_time)
 	
-func _get_health() -> void:
+func _on_get_health() -> void:
 	if energy <= 0 or health == max_health:
 		return
 	get_health(energy_amount)
 	energy -= energy_amount
-	print('health ', health)
-	print('max health ', max_health)
-	print('energy ', energy)
+	energy_changed.emit(energy, max_energy)
+
+
+func get_energy(amount: float) -> void:
+	if energy >= max_energy:
+		return
+	energy = min(energy + amount, max_energy)
+	energy_changed.emit(energy, max_energy)
 	
+func _on_energy_changed(curent: float, maximum: float) -> void:
+	health_tower.energy_changed(curent, maximum)

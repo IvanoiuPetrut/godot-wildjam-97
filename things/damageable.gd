@@ -4,6 +4,7 @@ extends  CharacterBody3D
 signal died
 signal health_changed(current: float, maximum: float)
 
+@export var orb_scene: PackedScene
 @export var max_health: float = 3.0
 var health: float
 
@@ -26,4 +27,8 @@ func get_health(amount:float) -> void:
 		
 func die() -> void:
 	died.emit()
+	if orb_scene:
+		var orb := orb_scene.instantiate()
+		get_parent().add_child(orb)
+		orb.global_position = global_position
 	queue_free()

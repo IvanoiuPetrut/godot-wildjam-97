@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bc1mw6k0bnrwk"
-path.s3tc="res://.godot/imported/middle.png-a193a19c0dd0e0b1b7e9042dd9139369.s3tc.ctex"
+uid="uid://b0wx8edmpfj6u"
+path.s3tc="res://.godot/imported/grass-1.png-9a7e17b63e6109a6fdf434a34d97112a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/cigar/middle.png"
-dest_files=["res://.godot/imported/middle.png-a193a19c0dd0e0b1b7e9042dd9139369.s3tc.ctex"]
+source_file="res://assets/grass-1.png"
+dest_files=["res://.godot/imported/grass-1.png-9a7e17b63e6109a6fdf434a34d97112a.s3tc.ctex"]
 
 [params]
 

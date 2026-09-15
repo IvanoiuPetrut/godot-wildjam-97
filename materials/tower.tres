@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cqgjlefj2g30y"]
+
+[ext_resource type="Texture2D" uid="uid://brtqynp1uya85" path="res://textures/all-rock-tiles_01.png" id="1_hdu0d"]
+
+[resource]
+albedo_texture = ExtResource("1_hdu0d")
+uv1_scale = Vector3(3, 3, 3)
+texture_filter = 0
+distance_fade_min_distance = 46.8
+distance_fade_max_distance = 0.0
