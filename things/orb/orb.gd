@@ -5,6 +5,7 @@ extends Node3D
 @export var energy_amount: float = 1.0
 
 @onready var area_3d: Area3D = $Area3D
+@onready var pickup: AudioStreamPlayer3D = $Pickup
 
 var collected := false
 var target: Node3D = null
@@ -31,4 +32,11 @@ func _collect() -> void:
 	area_3d.monitoring = false
 	if target.has_method("get_energy"):
 		target.get_energy(energy_amount)
+
+	remove_child(pickup)
+	get_tree().current_scene.add_child(pickup)
+	pickup.global_position = global_position
+	pickup.finished.connect(pickup.queue_free)
+	pickup.play()
+
 	queue_free()

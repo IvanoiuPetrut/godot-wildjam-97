@@ -1,0 +1,241 @@
+[gd_scene format=3 uid="uid://cm1pcr2mx8gxp"]
+
+[ext_resource type="Script" uid="uid://dq8tnhdoan42b" path="res://things/menu/menu.gd" id="1_0phus"]
+[ext_resource type="Texture2D" uid="uid://btinyaafn202f" path="res://assets/menu/Godot wildjam 97.png" id="1_xo7qp"]
+[ext_resource type="FontFile" uid="uid://dh6bwa06l4wai" path="res://assets/font/Kenney Mini Square.ttf" id="2_5xcrj"]
+[ext_resource type="Shader" uid="uid://dky4lwray4pv6" path="res://things/menu/going_to_sleep.gdshader" id="3_0phus"]
+[ext_resource type="Gradient" uid="uid://bnm73lldahnor" path="res://things/menu/radial_gradient.tres" id="5_wrm0o"]
+[ext_resource type="Gradient" uid="uid://d4lwtb500rji2" path="res://things/menu/clear_gradient.tres" id="6_e3pgk"]
+[ext_resource type="AudioStream" uid="uid://ch3ua4p4i8gb2" path="res://audio/write.ogg" id="7_3b1a7"]
+[ext_resource type="AudioStream" uid="uid://ck2mm3ep8yswr" path="res://audio/click.ogg" id="8_k0ard"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3b1a7"]
+shader = ExtResource("3_0phus")
+shader_parameter/speed = 2.2530001070175
+shader_parameter/frequency = 11.4550005441125
+shader_parameter/amplitude = 0.06
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wrm0o"]
+shader = ExtResource("3_0phus")
+shader_parameter/speed = 3.562000169195
+shader_parameter/frequency = 10.76400051129
+shader_parameter/amplitude = 0.0800000038
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wrm0o"]
+gradient = ExtResource("5_wrm0o")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.808, 0)
+
+[sub_resource type="Animation" id="Animation_wrm0o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/GoingToSleepBG:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.091800004, 0.16824003, 0.18, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer2/VBoxContainer/MainIntroLabel:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer2/VBoxContainer/ContinueLabel:visible_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer3/Vignette:texture:gradient")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_wrm0o")]
+}
+
+[sub_resource type="Animation" id="Animation_0phus"]
+resource_name = "entering_sleep"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/GoingToSleepBG:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.091800004, 0.16824003, 0.18, 1), Color(0.091800004, 0.16824003, 0.18, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer2/VBoxContainer/MainIntroLabel:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer2/VBoxContainer/ContinueLabel:visible_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.23333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer3/Vignette:texture:gradient")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("5_wrm0o"), ExtResource("6_e3pgk")]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_show_game_intro"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wrm0o"]
+_data = {
+&"RESET": SubResource("Animation_wrm0o"),
+&"entering_sleep": SubResource("Animation_0phus")
+}
+
+[node name="Menu" type="CanvasLayer" unique_id=80706333]
+script = ExtResource("1_0phus")
+write_volume_range_db = Vector2(-20, -15)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=256459307]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainArt" type="TextureRect" parent="MarginContainer" unique_id=459875812]
+material = SubResource("ShaderMaterial_3b1a7")
+layout_mode = 2
+texture = ExtResource("1_xo7qp")
+
+[node name="GoingToSleepBG" type="ColorRect" parent="MarginContainer" unique_id=436714240]
+material = SubResource("ShaderMaterial_wrm0o")
+layout_mode = 2
+color = Color(0.091800004, 0.16824003, 0.18, 1)
+
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=1235740629]
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2" unique_id=1484704400]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="GameIntroLabel" type="RichTextLabel" parent="MarginContainer2/VBoxContainer" unique_id=1794810909]
+custom_minimum_size = Vector2(922, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("2_5xcrj")
+theme_override_fonts/bold_font = ExtResource("2_5xcrj")
+theme_override_fonts/bold_italics_font = ExtResource("2_5xcrj")
+theme_override_fonts/italics_font = ExtResource("2_5xcrj")
+theme_override_fonts/mono_font = ExtResource("2_5xcrj")
+bbcode_enabled = true
+text = "[font_size=20][wave amp=5 freq=5]What can I do in this world. All i have is the fact that i can move [b][font_size=24][color=orange_red][pulse color=red][ W A S D ][/pulse][/color][/font_size][/b] and smoke this damn cigarette [b][font_size=24][color=orange_red][pulse color=red][ mouse wheel down ][/pulse][/color][/font_size][/b] otherwise i am going to die. This drains my energy but it seems my role in killing [b][font_size=24][color=orange_red][pulse color=red][ Left mouse click ][/pulse][/color][/font_size][/b] these orcs is giving me energy [b][font_size=24][color=orange_red][pulse color=red][ drpped orbs ][/pulse][/color][/font_size][/b]. With this time given to me even i can change the course of the future."
+fit_content = true
+visible_characters_behavior = 1
+
+[node name="MainIntroLabel" type="RichTextLabel" parent="MarginContainer2/VBoxContainer" unique_id=1879620981]
+custom_minimum_size = Vector2(922, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/normal_font = ExtResource("2_5xcrj")
+theme_override_fonts/bold_font = ExtResource("2_5xcrj")
+theme_override_fonts/bold_italics_font = ExtResource("2_5xcrj")
+theme_override_fonts/italics_font = ExtResource("2_5xcrj")
+theme_override_fonts/mono_font = ExtResource("2_5xcrj")
+bbcode_enabled = true
+text = "[font_size=24][wave amp=5 freq=5]It's getting pretty late. Should probably get [b][color=PLUM][pulse color=SLATE_BLUE freq=0.2][font_size=36]some sleep[/font_size][/pulse][/color][/b] since I stayed all day long in bed, this headache does not want to go away, all I could do is read this book about [b][color=FOREST_GREEN][pulse color=YELLOW freq=0.2][font_size=36]Orcs[/font_size][/pulse][/color][/b] wanting to take over the world and some fellows fighting for the greater good... Couldn't even have a [b][color=CORAL][pulse color=ORANGE_RED freq=0.2][font_size=36]smoke[/font_size][/pulse][/color][/b] in this state."
+fit_content = true
+visible_characters_behavior = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/VBoxContainer" unique_id=428483961]
+layout_mode = 2
+
+[node name="ContinueLabel" type="RichTextLabel" parent="MarginContainer2/VBoxContainer" unique_id=1499479168]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_5xcrj")
+theme_override_fonts/bold_font = ExtResource("2_5xcrj")
+bbcode_enabled = true
+text = "[b][font_size=38][wave amp=15 freq=5][color=SLATE_AZURE][pulse color=sandy_brown][SPACE TO CONTINUE]"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="." unique_id=1543263168]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Vignette" type="TextureRect" parent="MarginContainer3" unique_id=752767207]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("GradientTexture2D_wrm0o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1140204227]
+libraries/ = SubResource("AnimationLibrary_wrm0o")
+
+[node name="Write" type="AudioStreamPlayer" parent="." unique_id=1567395341]
+stream = ExtResource("7_3b1a7")
+volume_db = -64.606
+
+[node name="Click" type="AudioStreamPlayer" parent="." unique_id=1667794341]
+stream = ExtResource("8_k0ard")

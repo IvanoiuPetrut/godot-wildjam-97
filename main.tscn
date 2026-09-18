@@ -1,24 +1,29 @@
 [gd_scene format=3 uid="uid://cs5ny6ivmu8ur"]
 
 [ext_resource type="Texture2D" uid="uid://bn3pnkodvlicx" path="res://assets/middle.png" id="1_1bvp3"]
+[ext_resource type="Script" uid="uid://bisrynkf2i7ec" path="res://main.gd" id="1_efxa6"]
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://dld0g08h4knac" path="res://things/pauseMenu/pause_menu.tscn" id="3_dg77c"]
 [ext_resource type="PackedScene" uid="uid://c481asb02q03j" path="res://ground.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dfvlfd1fmfuhx" path="res://ui.tscn" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://c3khth1nn3noc" path="res://things/spawner/spawner.tscn" id="6_7mycd"]
 [ext_resource type="PackedScene" uid="uid://clojno7eu6y6u" path="res://things/tree.tscn" id="6_272bh"]
 [ext_resource type="PackedScene" uid="uid://1jpvxkaxro7i" path="res://things/grass.tscn" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://shtyo1pykvvq" path="res://things/tower.tscn" id="8_5vw27"]
+[ext_resource type="Script" uid="uid://tg8yjwoimy45" path="res://things/scatter/scatter.gd" id="9_scatter"]
+[ext_resource type="AudioStream" uid="uid://ldai1jeyj50v" path="res://audio/The Verdant Seer.ogg" id="11_efxa6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kek77"]
-sky_top_color = Color(0.030115182, 0.14374804, 0.08400487, 1)
-sky_horizon_color = Color(0.5062636, 0.6858936, 0.7645185, 1)
-sky_curve = 0.160766
-sky_energy_multiplier = 1.4
+sky_top_color = Color(0.096101575, 0.096134864, 0.25108898, 1)
+sky_horizon_color = Color(0.43477413, 0.20754144, 0.18756133, 1)
+sky_curve = 0.2111213
+sky_energy_multiplier = 1.2
 sky_cover = ExtResource("1_1bvp3")
-sky_cover_modulate = Color(0.353475, 0.6360045, 0.56533736, 1)
-ground_bottom_color = Color(0.19309446, 0.22505409, 0.20907348, 1)
-ground_horizon_color = Color(0.7176471, 1, 1, 1)
-ground_curve = 0.044382744
+sky_cover_modulate = Color(0.24825844, 0.45093048, 0.21898979, 1)
+ground_bottom_color = Color(0.02745098, 0.2, 0.24705882, 1)
+ground_horizon_color = Color(0.56328136, 0.32356694, 0.31570524, 1)
+ground_curve = 0.27857572
+sun_curve = 0.1351876
 energy_multiplier = 0.75
 
 [sub_resource type="Sky" id="Sky_5vw27"]
@@ -28,30 +33,77 @@ sky_material = SubResource("ProceduralSkyMaterial_kek77")
 background_mode = 2
 sky = SubResource("Sky_5vw27")
 tonemap_mode = 4
-tonemap_exposure = 0.76
-tonemap_agx_contrast = 1.18
+tonemap_exposure = 0.49
+tonemap_agx_white = 10.6
+tonemap_agx_contrast = 1.45
+glow_enabled = true
+glow_intensity = 2.47
 fog_enabled = true
 fog_mode = 1
-fog_light_color = Color(0.10048322, 0.2739691, 0.26119703, 1)
-fog_density = 1.0
-fog_sky_affect = 0.0
-fog_height = 2.0
+fog_light_color = Color(0.18039216, 0.27450982, 0.2627451, 1)
+fog_light_energy = 0.82
+fog_sun_scatter = 0.02
+fog_density = 0.5746
+fog_sky_affect = 0.122
+fog_height = 2.2
 fog_height_density = 1.2089
+fog_depth_begin = 0.0
+fog_depth_end = 20.0
+
+[sub_resource type="Animation" id="Animation_dg77c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight3D:light_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.12941177, 1, 0.6431373, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ycdy4"]
+resource_name = "sun_idle"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight3D:light_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.12941177, 1, 0.6431373, 1), Color(0.2276027, 1.5565991, 1.0028505, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w48qg"]
+_data = {
+&"RESET": SubResource("Animation_dg77c"),
+&"sun_idle": SubResource("Animation_ycdy4")
+}
 
 [node name="Main" type="Node3D" unique_id=1110698009]
+script = ExtResource("1_efxa6")
 
 [node name="Ui" parent="." unique_id=791350379 instance=ExtResource("5_lquwl")]
+
+[node name="PauseMenu" parent="." unique_id=2137927511 instance=ExtResource("3_dg77c")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1054908050]
 environment = SubResource("Environment_272bh")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=565835382]
 transform = Transform3D(-0.6986395, -0.36710238, 0.61411613, -0.25963473, 0.9299071, 0.2605045, -0.6667028, 0.022552878, -0.7449824, 0, 0, 0)
-light_color = Color(0.9137255, 1, 0.6431373, 1)
-light_energy = 1.932
-light_indirect_energy = 2.087
+light_color = Color(0.12941177, 1, 0.6431373, 1)
+light_energy = 1.887
+light_indirect_energy = 1.322
 light_angular_distance = 5.24
-light_specular = 0.379
+light_specular = 0.0
 shadow_enabled = true
 shadow_opacity = 0.6
 
@@ -63,28 +115,169 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3, 0.2, 6.4)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7, 0, -1.3000001)
 
 [node name="Spawner" parent="." unique_id=2107025335 instance=ExtResource("6_7mycd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.900001, 0, -6.1000004)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.3, 0, -8.320002)
+max_alive = 15
 
-[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=485204734]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9, 0.3, 1)
+[node name="Spawner2" parent="." unique_id=1778288719 instance=ExtResource("6_7mycd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.1, 0, 25.599998)
+spawn_interval = 5.0
+max_alive = 5
+
+[node name="Spawner4" parent="." unique_id=1873279327 instance=ExtResource("6_7mycd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.560013, 0, -33.72)
+spawn_interval = 5.0
+max_alive = 10
+
+[node name="Spawner3" parent="." unique_id=553543090 instance=ExtResource("6_7mycd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.600006, 0, 36)
+spawn_interval = 4.0
+max_alive = 8
+
+[node name="Visuals" type="Node3D" parent="." unique_id=836562709]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Visuals" unique_id=485204734]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9, 0.4, 1)
+light_color = Color(1, 0.24705882, 1, 1)
+light_energy = 12.497
+omni_range = 12.419
+omni_attenuation = 0.584
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Visuals/OmniLight3D" unique_id=584520059]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6, 0.3, 1)
 light_color = Color(1, 0.24705882, 1, 1)
 light_energy = 12.497
 omni_attenuation = 0.584
 
-[node name="Tree" parent="." unique_id=1860872115 instance=ExtResource("6_272bh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8, 1.3999997, 4.1)
+[node name="OmniLight3D" type="OmniLight3D" parent="Visuals/OmniLight3D/OmniLight3D" unique_id=1554303298]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8000011, 0.3, 10.3)
+light_color = Color(1, 0.24705882, 1, 1)
+light_energy = 12.497
+omni_attenuation = 0.584
 
-[node name="Tree2" parent="." unique_id=771527752 instance=ExtResource("6_272bh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.7, 1.3999997, 9.7)
+[node name="OmniLight3D" type="OmniLight3D" parent="Visuals/OmniLight3D/OmniLight3D/OmniLight3D" unique_id=1189376260]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.799999, 0.3, 17.7)
+light_color = Color(1, 0.24705882, 1, 1)
+light_energy = 12.497
+omni_attenuation = 0.584
 
-[node name="Tree3" parent="." unique_id=1127403445 instance=ExtResource("6_272bh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.3, 1.8999997, 4.1)
+[node name="Tree" parent="Visuals" unique_id=1860872115 instance=ExtResource("6_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, 4.1)
 
-[node name="Grass" parent="." unique_id=799053036 instance=ExtResource("7_272bh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0000005, 0.100000024, 2.1000001)
+[node name="Tree2" parent="Visuals" unique_id=771527752 instance=ExtResource("6_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.1, 0, 9.7)
 
-[node name="Grass" parent="Grass" unique_id=1897863890 instance=ExtResource("7_272bh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0000005, 0.100000024, 3.8000004)
+[node name="Tree3" parent="Visuals" unique_id=1127403445 instance=ExtResource("6_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.3, 0, 28.800001)
 
-[node name="Tower" parent="." unique_id=432150047 instance=ExtResource("8_5vw27")]
+[node name="TreeScatter" type="Node3D" parent="Visuals" unique_id=1721321875]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 11)
+script = ExtResource("9_scatter")
+scene = ExtResource("6_272bh")
+area_size = Vector2(100, 100)
+max_scale = 1.4
+seed_value = 15
+
+[node name="Tree1" parent="Visuals/TreeScatter" unique_id=191926201 instance=ExtResource("6_272bh")]
+transform = Transform3D(-0.9403878, 0, -0.6938245, 0, 1.168641, 0, 0.6938245, 0, -0.9403878, -5.905636, 0, -41.961952)
+
+[node name="Tree2" parent="Visuals/TreeScatter" unique_id=1724315999 instance=ExtResource("6_272bh")]
+transform = Transform3D(-0.38572383, 0, -0.76804644, 0, 0.85946393, 0, 0.76804644, 0, -0.38572383, 20.761368, 0, 12.672966)
+
+[node name="Tree3" parent="Visuals/TreeScatter" unique_id=1772087729 instance=ExtResource("6_272bh")]
+transform = Transform3D(0.18763214, 0, 0.76585037, 0, 0.78850025, 0, -0.76585037, 0, 0.18763214, 35.479965, 0, -36.836853)
+
+[node name="Tree4" parent="Visuals/TreeScatter" unique_id=1921471495 instance=ExtResource("6_272bh")]
+transform = Transform3D(-0.113678455, 0, -1.3239014, 0, 1.328773, 0, 1.3239014, 0, -0.113678455, 9.268127, 0, -19.547924)
+
+[node name="Tree5" parent="Visuals/TreeScatter" unique_id=493636571 instance=ExtResource("6_272bh")]
+transform = Transform3D(-0.77548176, 0, 1.1513653, 0, 1.3881693, 0, -1.1513653, 0, -0.77548176, -30.760225, 0, -5.391018)
+
+[node name="Tree6" parent="Visuals/TreeScatter" unique_id=1997673004 instance=ExtResource("6_272bh")]
+transform = Transform3D(-0.9136736, 0, -0.8150713, 0, 1.224394, 0, 0.8150713, 0, -0.9136736, 49.023888, 0, -3.6471825)
+
+[node name="Tree7" parent="Visuals/TreeScatter" unique_id=486106343 instance=ExtResource("6_272bh")]
+transform = Transform3D(-0.9463874, 0, 0.37642953, 0, 1.018503, 0, -0.37642953, 0, -0.9463874, 24.329468, 0, 43.05137)
+
+[node name="Tree8" parent="Visuals/TreeScatter" unique_id=1909203225 instance=ExtResource("6_272bh")]
+transform = Transform3D(-0.036572628, 0, 0.8112618, 0, 0.8120857, 0, -0.8112618, 0, -0.036572628, 45.630737, 0, 22.193161)
+
+[node name="Tree9" parent="Visuals/TreeScatter" unique_id=1846707937 instance=ExtResource("6_272bh")]
+transform = Transform3D(0.4944362, 0, 0.8324792, 0, 0.96824, 0, -0.8324792, 0, 0.4944362, -37.902214, 0, -37.3671)
+
+[node name="Tree10" parent="Visuals/TreeScatter" unique_id=1975970088 instance=ExtResource("6_272bh")]
+transform = Transform3D(-0.8948532, 0, 0.60266787, 0, 1.0788747, 0, -0.60266787, 0, -0.8948532, -28.286068, 0, -28.44135)
+
+[node name="Tree11" parent="Visuals/TreeScatter" unique_id=1321386209 instance=ExtResource("6_272bh")]
+transform = Transform3D(-0.7132151, 0, 0.053387456, 0, 0.7152105, 0, -0.053387456, 0, -0.7132151, -32.156624, 0, 26.29322)
+
+[node name="Tree12" parent="Visuals/TreeScatter" unique_id=1324606300 instance=ExtResource("6_272bh")]
+transform = Transform3D(0.3421397, 0, -1.1024194, 0, 1.1542912, 0, 1.1024194, 0, 0.3421397, -49.842644, 0, 10.59882)
+
+[node name="GrassScatter" type="Node3D" parent="Visuals" unique_id=305953920]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 2)
+script = ExtResource("9_scatter")
+scene = ExtResource("7_272bh")
+count = 15
+area_size = Vector2(50, 50)
+min_scale = 0.6
+seed_value = 2
+
+[node name="Grass1" parent="Visuals/GrassScatter" unique_id=799053036 instance=ExtResource("7_272bh")]
+transform = Transform3D(0.72408444, 0, -0.19325665, 0, 0.7494307, 0, 0.19325665, 0, 0.72408444, 10.144119, 0, 0.9683647)
+
+[node name="Grass2" parent="Visuals/GrassScatter" unique_id=852156461 instance=ExtResource("7_272bh")]
+transform = Transform3D(-0.612586, 0, -0.1796989, 0, 0.63839906, 0, 0.1796989, 0, -0.612586, -12.049922, 0, 1.8362637)
+
+[node name="Grass3" parent="Visuals/GrassScatter" unique_id=534348043 instance=ExtResource("7_272bh")]
+transform = Transform3D(-0.938633, 0, -0.6668929, 0, 1.1514244, 0, 0.6668929, 0, -0.938633, -10.42561, 0, -23.813377)
+
+[node name="Grass4" parent="Visuals/GrassScatter" unique_id=1630133252 instance=ExtResource("7_272bh")]
+transform = Transform3D(-0.96991754, 0, -0.3674474, 0, 1.0371873, 0, 0.3674474, 0, -0.96991754, 6.155262, 0, -4.6354294)
+
+[node name="Grass5" parent="Visuals/GrassScatter" unique_id=1204577216 instance=ExtResource("7_272bh")]
+transform = Transform3D(0.44208598, 0, 0.6991597, 0, 0.8272027, 0, -0.6991597, 0, 0.44208598, -10.480288, 0, 12.289703)
+
+[node name="Grass6" parent="Visuals/GrassScatter" unique_id=857410101 instance=ExtResource("7_272bh")]
+transform = Transform3D(0.57430327, 0, 0.7383009, 0, 0.9353676, 0, -0.7383009, 0, 0.57430327, -15.061675, 0, -1.5427246)
+
+[node name="Grass7" parent="Visuals/GrassScatter" unique_id=50453043 instance=ExtResource("7_272bh")]
+transform = Transform3D(0.71345365, 0, -0.8037279, 0, 1.0747068, 0, 0.8037279, 0, 0.71345365, -14.427477, 0, 12.3079605)
+
+[node name="Grass8" parent="Visuals/GrassScatter" unique_id=1993471434 instance=ExtResource("7_272bh")]
+transform = Transform3D(0.74976355, 0, 0.8515555, 0, 1.134589, 0, -0.8515555, 0, 0.74976355, 19.550552, 0, 7.066334)
+
+[node name="Grass9" parent="Visuals/GrassScatter" unique_id=311974585 instance=ExtResource("7_272bh")]
+transform = Transform3D(1.1395677, 0, -0.24571712, 0, 1.1657579, 0, 0.24571712, 0, 1.1395677, 4.9636936, 0, 19.885208)
+
+[node name="Grass10" parent="Visuals/GrassScatter" unique_id=841674146 instance=ExtResource("7_272bh")]
+transform = Transform3D(0.4752757, 0, 0.63677305, 0, 0.794586, 0, -0.63677305, 0, 0.4752757, 14.816223, 0, 1.991684)
+
+[node name="Grass11" parent="Visuals/GrassScatter" unique_id=1152582727 instance=ExtResource("7_272bh")]
+transform = Transform3D(0.56789005, 0, -0.26694834, 0, 0.6275034, 0, 0.26694834, 0, 0.56789005, 11.118317, 0, -2.238037)
+
+[node name="Grass12" parent="Visuals/GrassScatter" unique_id=475109447 instance=ExtResource("7_272bh")]
+transform = Transform3D(0.95738614, 0, -0.52479297, 0, 1.0917857, 0, 0.52479297, 0, 0.95738614, -9.505356, 0, -2.6697578)
+
+[node name="Grass13" parent="Visuals/GrassScatter" unique_id=1555970077 instance=ExtResource("7_272bh")]
+transform = Transform3D(-0.2044581, 0, 0.92522514, 0, 0.94754666, 0, -0.92522514, 0, -0.2044581, 2.4586906, 0, -2.6512356)
+
+[node name="Grass14" parent="Visuals/GrassScatter" unique_id=2115619669 instance=ExtResource("7_272bh")]
+transform = Transform3D(-1.2052572, 0, 0.11194636, 0, 1.2104449, 0, -0.11194636, 0, -1.2052572, -14.279214, 0, -21.384108)
+
+[node name="Grass15" parent="Visuals/GrassScatter" unique_id=429580442 instance=ExtResource("7_272bh")]
+transform = Transform3D(0.55002266, 0, -0.3861841, 0, 0.6720588, 0, 0.3861841, 0, 0.55002266, -11.868151, 0, -24.732239)
+
+[node name="Tower" parent="Visuals" unique_id=432150047 instance=ExtResource("8_5vw27")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -20, 0, -59.800003)
+
+[node name="Tower2" parent="Visuals" unique_id=1207295414 instance=ExtResource("8_5vw27")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -5.92, 0, -59.800003)
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=1140296305]
+stream = ExtResource("11_efxa6")
+autoplay = true
+bus = &"WeirdMusic"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1685452136]
+libraries/ = SubResource("AnimationLibrary_w48qg")
+autoplay = &"sun_idle"

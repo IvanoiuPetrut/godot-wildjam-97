@@ -3,10 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://cfvg72j1abvfd" path="res://assets/tree.png" id="1_brfkd"]
 
 [node name="Tree" type="Node3D" unique_id=1860872115]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8000001, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=1987020757]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.61, 0)
 pixel_size = 0.03
 texture_filter = 0
 texture = ExtResource("1_brfkd")
@@ -22,3 +21,11 @@ transform = Transform3D(-0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, -0.8
 pixel_size = 0.03
 texture_filter = 0
 texture = ExtResource("1_brfkd")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=2135076502]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6000003, 0)
+light_color = Color(0.57254905, 1, 0.35686275, 1)
+light_energy = 8.159
+light_indirect_energy = 1.25
+light_size = 0.13
+omni_range = 3.874

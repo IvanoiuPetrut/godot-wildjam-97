@@ -1,17 +1,20 @@
 extends CanvasLayer
 @onready var crosshair: TextureRect = $CanvasLayer/MarginContainer/Crosshair
 @onready var damage_overlay: ColorRect = $DamageOverlay/ColorRect
+@onready var time_timer: Timer = $MarginContainer/TimeTimer
+@onready var time_label: RichTextLabel = $MarginContainer/TimeLabel
 
-## How fast the effect chases the health value. Higher = snappier.
 @export var response_speed: float = 6.0
 
 var _target_intensity: float = 0.0
 var _intensity: float = 0.0
+var time_in_seconds := 0
 
 func _ready() -> void:
 	# Wait a frame so the player's own _ready() has initialised its health.
 	await get_tree().process_frame
 	var player := get_tree().get_first_node_in_group("player")
+	time_timer.timeout.connect(_on_time_timer_timeout)
 	if player is Damageable:
 		player.health_changed.connect(_on_player_health_changed)
 		_on_player_health_changed(player.health, player.max_health)
@@ -50,4 +53,10 @@ func _input(event: InputEvent) -> void:
 				0.0, # End value
 				0.5  # Duration in seconds
 			).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
-		
+
+func _on_time_timer_timeout() -> void:
+	time_in_seconds += 1
+	var minutes = time_in_seconds / 60
+	var seconds = time_in_seconds % 60
+	time_label.text = "%02d:%02d " % [minutes, seconds]
+	pass

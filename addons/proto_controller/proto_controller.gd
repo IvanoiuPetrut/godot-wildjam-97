@@ -11,8 +11,13 @@ extends Damageable
 @onready var health_tower: Node3D = $Head/Health
 @onready var health_timer: Timer = $HealthTimer
 @onready var camera_3d: Camera3D = $Head/Camera3D
+@onready var footsteps: AudioStreamPlayer3D = $Footsteps
+@onready var inhale: AudioStreamPlayer3D = $Inhale
+
+@export var step_interval: float = 0.3 # Seconds between footstep sounds while walking
 
 var bob_time: float = 0.0
+var step_timer: float = 0.0
 var weapon_base_position: Vector3
 var can_shoot: bool = true
 
@@ -95,8 +100,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Mouse capturing
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		capture_mouse()
-	if Input.is_key_pressed(KEY_ESCAPE):
-		release_mouse()
 	
 	# Look around
 	if mouse_captured and event is InputEventMouseMotion:
@@ -136,12 +139,21 @@ func _physics_process(delta: float) -> void:
 
 	# Apply desired movement to velocity
 	if can_move:
+		
 		var input_dir := Input.get_vector(input_left, input_right, input_forward, input_back)
 		var move_dir := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		if move_dir:
 			velocity.x = move_dir.x * move_speed
 			velocity.z = move_dir.z * move_speed
+			if is_on_floor():
+				step_timer += delta
+				if step_timer >= step_interval:
+					step_timer = 0.0
+					footsteps.play()
+			else:
+				step_timer = 0.0
 		else:
+			step_timer = 0.0
 			velocity.x = move_toward(velocity.x, 0, move_speed)
 			velocity.z = move_toward(velocity.z, 0, move_speed)
 	else:
@@ -236,10 +248,11 @@ func _input(event: InputEvent) -> void:
 func _fire_weapon() -> void:
 	aim_ray.force_raycast_update()
 	camera_3d.shake_camera()
-	weapon_sprite.shoot()
+	var aim_point := aim_ray.get_collision_point() if aim_ray.is_colliding() else aim_ray.global_transform * aim_ray.target_position
+	weapon_sprite.shoot(aim_point)
 	if not aim_ray.is_colliding():
 		return
-		
+
 	var hit_target := aim_ray.get_collider()
 	if hit_target is Damageable:
 		hit_target.take_damage(1.0)
@@ -248,14 +261,16 @@ func die() -> void:
 	died.emit()
 	can_move = false
 	can_shoot = false
-	print("player died")
+	move_speed = 0
 	
 func _on_health_timer_timeout() -> void:
 	take_damage(damage_over_time)
 	
 func _on_get_health() -> void:
-	if energy <= 0 or health == max_health:
+	if energy <= 0 or health == max_health or (health + energy_amount) >= max_health:
 		return
+	if not inhale.playing:
+		inhale.play()
 	get_health(energy_amount)
 	energy -= energy_amount
 	energy_changed.emit(energy, max_energy)

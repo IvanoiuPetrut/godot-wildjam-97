@@ -1,9 +1,13 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://6lh4sxdpwy5h"]
 
 [ext_resource type="Texture2D" uid="uid://cisufve8jg1g6" path="res://textures/all-rock-tiles_02.png" id="1_xygne"]
+[ext_resource type="Texture2D" uid="uid://0cmkldxwkd6n" path="res://textures/all-rock-tiles_08.png" id="2_3c7dl"]
 
 [resource]
 albedo_texture = ExtResource("1_xygne")
+emission_enabled = true
+normal_enabled = true
+normal_scale = -0.56
+normal_texture = ExtResource("2_3c7dl")
 uv1_scale = Vector3(250, 250, 250)
 texture_filter = 0
-proximity_fade_enabled = true

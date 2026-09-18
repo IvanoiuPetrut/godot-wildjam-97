@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ldai1jeyj50v"
+path="res://.godot/imported/The Verdant Seer.ogg-ef1c88f09559f53e636eb55f1a49238b.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/The Verdant Seer.ogg"
+dest_files=["res://.godot/imported/The Verdant Seer.ogg-ef1c88f09559f53e636eb55f1a49238b.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

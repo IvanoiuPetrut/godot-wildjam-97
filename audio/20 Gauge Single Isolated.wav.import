@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bk78nb2r3xh5g"
+path="res://.godot/imported/20 Gauge Single Isolated.wav-6526b61f8439affb9b52893a1f4ca529.sample"
+
+[deps]
+
+source_file="res://audio/20 Gauge Single Isolated.wav"
+dest_files=["res://.godot/imported/20 Gauge Single Isolated.wav-6526b61f8439affb9b52893a1f4ca529.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

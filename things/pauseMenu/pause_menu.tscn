@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://dld0g08h4knac"]
+
+[ext_resource type="Script" uid="uid://circbphrg2x85" path="res://things/pauseMenu/pause_menu.gd" id="1_5mdfj"]
+[ext_resource type="Shader" uid="uid://dky4lwray4pv6" path="res://things/menu/going_to_sleep.gdshader" id="1_pfmqh"]
+[ext_resource type="FontFile" uid="uid://dh6bwa06l4wai" path="res://assets/font/Kenney Mini Square.ttf" id="2_5mdfj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8bbjy"]
+shader = ExtResource("1_pfmqh")
+shader_parameter/speed = 4.2570002022075
+shader_parameter/frequency = 2.5710001221225
+shader_parameter/amplitude = 0.0510000024225
+
+[sub_resource type="Gradient" id="Gradient_5mdfj"]
+offsets = PackedFloat32Array(0.005988024, 1)
+colors = PackedColorArray(0.010499998, 0.060083326, 0.07, 0.3254902, 0.0518, 0.11942002, 0.14, 0.61960787)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_aqcv7"]
+gradient = SubResource("Gradient_5mdfj")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=2137927511]
+process_mode = 3
+visible = false
+script = ExtResource("1_5mdfj")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1335674065]
+material = SubResource("ShaderMaterial_8bbjy")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_aqcv7")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1033156195]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -57.5
+offset_bottom = 57.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=2031340310]
+layout_mode = 2
+theme_override_constants/separation = 200
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=1279827861]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_5mdfj")
+theme_override_fonts/bold_font = ExtResource("2_5mdfj")
+bbcode_enabled = true
+text = "[b][font_size=48][color=light_cyan][wave amp=100]PAUSED"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1308864575]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 256
+
+[node name="ResumeBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1661771420]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8784314, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_5mdfj")
+theme_override_font_sizes/font_size = 32
+text = "Resume"
+
+[node name="RetryBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1385817945]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8784314, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_5mdfj")
+theme_override_font_sizes/font_size = 32
+text = "RETRY"

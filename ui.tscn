@@ -4,18 +4,19 @@
 [ext_resource type="Script" uid="uid://ce64jcokuua06" path="res://ui.gd" id="1_m6e0p"]
 [ext_resource type="Shader" uid="uid://cohm5jc3km0ok" path="res://shaders/crosshair.gdshader" id="2_27fn8"]
 [ext_resource type="Shader" uid="uid://bg042aonp33ix" path="res://shaders/damage_overlay.gdshader" id="2_nltto"]
+[ext_resource type="FontFile" uid="uid://dh6bwa06l4wai" path="res://assets/font/Kenney Mini Square.ttf" id="5_ibotj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ibotj"]
 shader = ExtResource("2_nltto")
-shader_parameter/intensity = 0.42800002033
-shader_parameter/vignette_color = Color(0.09637485, 0.05619636, 0.0063302317, 1)
-shader_parameter/vignette_inner = 0.95
-shader_parameter/vignette_inner_hurt = 0.15
-shader_parameter/vignette_outer = 1.45
-shader_parameter/vignette_base = 0.5470000259825
-shader_parameter/aberration = 0.0230000010925
+shader_parameter/intensity = 1.0
+shader_parameter/vignette_color = Color(0, 0, 0, 1)
+shader_parameter/vignette_inner = 0.4190000199025
+shader_parameter/vignette_inner_hurt = 0.0
+shader_parameter/vignette_outer = 0.9470000449825
+shader_parameter/vignette_base = 0.40400001919
+shader_parameter/aberration = 0.0310000014725
 shader_parameter/pulse_speed = 7.0
-shader_parameter/pulse_amount = 0.494000023465
+shader_parameter/pulse_amount = 0.2290000108775
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nltto"]
 shader = ExtResource("2_27fn8")
@@ -90,3 +91,21 @@ texture = ExtResource("1_fyqef")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1157147143]
 libraries/ = SubResource("AnimationLibrary_27fn8")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=641992670]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="TimeTimer" type="Timer" parent="MarginContainer" unique_id=249564208]
+autostart = true
+
+[node name="TimeLabel" type="RichTextLabel" parent="MarginContainer" unique_id=417901990]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.8784314, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("5_ibotj")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[wave]00:00  "
+fit_content = true
+horizontal_alignment = 2

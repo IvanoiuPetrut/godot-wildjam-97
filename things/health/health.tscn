@@ -57,30 +57,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("OmniLight3D:light_energy")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.333]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("OmniLight3D:light_size")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
 
 [sub_resource type="Animation" id="Animation_xk4ju"]
 resource_name = "idle"
@@ -97,30 +73,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(-0.08726646, 0, -0.17453292), Vector3(-0.08726646, -0.08726646, -0.17453292), Vector3(-0.08726646, 0.08726646, -0.17453292), Vector3(-0.08726646, 0, -0.17453292)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("OmniLight3D:light_energy")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(1, 4.438279),
-"update": 0,
-"values": [0.333, 0.5]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("OmniLight3D:light_size")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.42, 0.82, 1.21, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.175, 0.119, 0.432, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dfbnh"]
@@ -139,7 +91,6 @@ texture = ExtResource("2_ckvsk")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Top" unique_id=658153469]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.35, 0)
-billboard = 2
 shaded = true
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_tqjhm")
@@ -149,20 +100,11 @@ frame_progress = 0.33237535
 
 [node name="Middle" type="Sprite3D" parent="." unique_id=1468903355]
 transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
-shaded = true
 texture = ExtResource("3_kv6hd")
 
 [node name="Bottom" type="Sprite3D" parent="." unique_id=605252678]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
-shaded = true
 texture = ExtResource("4_xk4ju")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1154624396]
-transform = Transform3D(1, 1.0244548e-08, 9.313226e-10, -4.773028e-09, 1, 0, 0, 0, 1, -0.0864937, 0.99053013, 0.24357784)
-light_color = Color(0.9764706, 0.80784315, 0, 1)
-light_energy = 0.333
-omni_range = 0.8
-omni_attenuation = -0.042
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1547435888]
 libraries/ = SubResource("AnimationLibrary_dfbnh")
@@ -171,6 +113,5 @@ autoplay = &"idle"
 [node name="HealthBar" type="Sprite3D" parent="." unique_id=368673005]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31392738, 0.37643474, 0)
 modulate = Color(18.892157, 18.892157, 0, 0.9019608)
-shaded = true
 texture_filter = 0
 texture = ExtResource("6_xk4ju")

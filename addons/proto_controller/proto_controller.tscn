@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://dibod8ukqie7i" path="res://things/health/health.tscn" id="3_5hfox"]
 [ext_resource type="Texture2D" uid="uid://bdr6pnrpbld34" path="res://assets/muzzle-shoot.png" id="5_0rk7u"]
 [ext_resource type="Script" uid="uid://vj3o0fuir6jv" path="res://weapon.gd" id="5_h60nn"]
+[ext_resource type="AudioStream" uid="uid://bk78nb2r3xh5g" path="res://audio/20 Gauge Single Isolated.wav" id="6_1tksx"]
+[ext_resource type="AudioStream" uid="uid://d2gwr2aet8xqk" path="res://audio/footstep_concrete_001.ogg" id="7_ujot4"]
+[ext_resource type="AudioStream" uid="uid://c5rt2iewisu6t" path="res://audio/inhale.mp3" id="9_ths8c"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iof21"]
 albedo_color = Color(0.91806, 0.575202, 0.222449, 1)
@@ -19,7 +22,7 @@ radius = 0.4
 height = 1.8
 
 [sub_resource type="Animation" id="Animation_0rk7u"]
-length = 0.001
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -67,6 +70,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("OmniLight3D:light_energy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_h60nn"]
@@ -120,6 +135,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("OmniLight3D:light_energy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.055406187, 0.10066758),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [6.2, 0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ujot4"]
 _data = {
@@ -127,17 +154,9 @@ _data = {
 &"shoot_1": SubResource("Animation_h60nn")
 }
 
-[sub_resource type="TextMesh" id="TextMesh_h60nn"]
-text = " 		*
-    ░     * 
-*   ░  ░░
-    *  ░"
-font_size = 3
-uppercase = true
-depth = 0.005
-
 [node name="ProtoController" type="CharacterBody3D" unique_id=1018779692 groups=["player"]]
 script = ExtResource("1_ucva2")
+energy_amount = 2.0
 max_health = 100.0
 
 [node name="Mesh" type="MeshInstance3D" parent="." unique_id=992298579]
@@ -164,9 +183,9 @@ omni_range = 2.848
 omni_attenuation = -3.688
 
 [node name="AimRay" type="RayCast3D" parent="Head/Camera3D" unique_id=1018409931]
-target_position = Vector3(0, 1, -50)
+target_position = Vector3(0, 1, -100)
 debug_shape_custom_color = Color(0.5764706, 1, 0.047058824, 1)
-debug_shape_thickness = 4
+debug_shape_thickness = 1
 
 [node name="Health" parent="Head" unique_id=701347803 instance=ExtResource("3_5hfox")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.62821704, 0.10392862, -0.5769189)
@@ -174,12 +193,17 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.62821704, 0.10392862
 [node name="Weapon" type="Sprite3D" parent="Head" unique_id=598647893]
 transform = Transform3D(0.47511426, 0.0524531, -1.7353717, -0.19752176, 1.7891297, 0, 1.7248918, 0.19042982, 0.4780009, 0.3, -0.2, -0.5)
 flip_h = true
+shaded = true
 texture_filter = 0
 texture = ExtResource("2_wr06p")
 script = ExtResource("5_h60nn")
 
+[node name="GunSound" type="AudioStreamPlayer3D" parent="Head/Weapon" unique_id=1524676336]
+transform = Transform3D(0.1466402, -0.060963504, 0.53237396, 0.016189227, 0.5522005, 0.05877463, -0.5356086, 0, 0.14753114, -0.23370995, 0.030091256, -0.0054515796)
+stream = ExtResource("6_1tksx")
+
 [node name="MuzzleHsoot" type="Sprite3D" parent="Head/Weapon" unique_id=610991124]
-transform = Transform3D(4.2059884e-08, 1.1901742e-08, 1, 0.27228013, -0.9622179, 0, 0.9622179, 0.27228013, -4.371139e-08, -0.2, 0.03, -0.05)
+transform = Transform3D(4.205988e-08, 1.1901742e-08, 1, 0.2722801, -0.96221787, 0, 0.96221787, 0.2722801, -4.371139e-08, -0.2, 0.03, -0.05)
 visible = false
 flip_h = true
 modulate = Color(0.5176471, 1, 1, 1)
@@ -190,28 +214,19 @@ texture = ExtResource("5_0rk7u")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Head/Weapon" unique_id=1134240562]
 libraries/ = SubResource("AnimationLibrary_ujot4")
 
-[node name="ShootParticles" type="CPUParticles3D" parent="Head/Weapon" unique_id=1428904188]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14439893, 0.012730162, 3.6961865e-09)
-cast_shadow = 0
-visibility_range_end = 575.65
-emitting = false
-lifetime = 0.45
-one_shot = true
-speed_scale = 6.19
-explosiveness = 0.11
-mesh = SubResource("TextMesh_h60nn")
-spread = 16.78
-gravity = Vector3(0.1, 0.2, 0)
-linear_accel_max = 5.0
-radial_accel_max = 14.05
-angle_min = 16.5
-angle_max = 16.5
-scale_amount_min = 0.0
-scale_amount_max = 3.0
-color = Color(0.15637663, 0.3790383, 0.2256704, 1)
-hue_variation_min = -0.38
-hue_variation_max = 0.36
-anim_speed_max = 13.15
-anim_offset_max = 0.0649
+[node name="OmniLight3D" type="OmniLight3D" parent="Head/Weapon" unique_id=1678505091]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0.1)
+light_color = Color(1, 0.8156863, 0.627451, 1)
+light_energy = 0.0
+omni_range = 1.0
 
 [node name="HealthTimer" type="Timer" parent="." unique_id=379942082]
+
+[node name="Footsteps" type="AudioStreamPlayer3D" parent="." unique_id=1459649985]
+stream = ExtResource("7_ujot4")
+volume_db = -3.232
+max_db = 1.939
+pitch_scale = 0.88
+
+[node name="Inhale" type="AudioStreamPlayer3D" parent="." unique_id=2088754574]
+stream = ExtResource("9_ths8c")

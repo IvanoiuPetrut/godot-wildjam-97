@@ -5,18 +5,30 @@
 [node name="Grass" type="Node3D" unique_id=799053036]
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=42486246]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.26, 0)
 pixel_size = 0.04
+shaded = true
 texture_filter = 0
 texture = ExtResource("1_tiprd")
 
 [node name="Sprite3D2" type="Sprite3D" parent="." unique_id=724911371]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.26, 0)
 pixel_size = 0.04
+shaded = true
 texture_filter = 0
 texture = ExtResource("1_tiprd")
 
 [node name="Sprite3D3" type="Sprite3D" parent="." unique_id=278396426]
-transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.7071068, 0, 0, 0)
+transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.7071068, 0, 0.26, 0)
 pixel_size = 0.04
+shaded = true
 texture_filter = 0
 texture = ExtResource("1_tiprd")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=48612532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.7)
+light_color = Color(0.2901961, 0.93333334, 0.2901961, 1)
+light_energy = 7.712
+light_size = 0.031
+omni_range = 1.242
+omni_attenuation = 1.293

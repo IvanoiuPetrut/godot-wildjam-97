@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dj8h1uvy6574c" path="res://things/orb/orb.gd" id="1_3fahn"]
 [ext_resource type="Texture2D" uid="uid://2mexj1a5tmcf" path="res://assets/ball.png" id="1_t8p86"]
+[ext_resource type="AudioStream" uid="uid://cwkrxume7nw3h" path="res://audio/pickup.ogg" id="4_rpy6n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3fahn"]
 atlas = ExtResource("1_t8p86")
@@ -92,6 +93,7 @@ _data = {
 
 [node name="Orb" type="Node3D" unique_id=2104434160]
 script = ExtResource("1_3fahn")
+energy_amount = 6.0
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=2054721338]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
@@ -112,3 +114,12 @@ shape = SubResource("BoxShape3D_paxbi")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1764639380]
 libraries/ = SubResource("AnimationLibrary_rpy6n")
 autoplay = &"idle"
+
+[node name="Pickup" type="AudioStreamPlayer3D" parent="." unique_id=1199726410]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1000001, 0)
+stream = ExtResource("4_rpy6n")
+volume_db = 14.545
+bus = &"WeirdMusic"
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=66741615]
+light_color = Color(0.18, 1, 0.4943332, 1)
